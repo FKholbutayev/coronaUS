@@ -7,15 +7,25 @@ const SearchParams = () => {
   const [state, setState] = useState("New York");
 
   if (!stateData.loading) {
-    const selectedState = stateData.data.filter(({ provinceState }) => {
-      return provinceState === state;
-    });
+    let selectedState = stateData.data
+      .filter(({ provinceState }) => {
+        return provinceState === state;
+      })
+      .reduce(
+        (prev, { confirmed, recovered, deaths }) => {
+          prev.confirmed = prev.confirmed + confirmed;
+          prev.recovered = prev.recovered + recovered;
+          prev.deaths = prev.deaths + deaths;
+          return prev;
+        },
+        { confirmed: 0, recovered: 0, deaths: 0 }
+      );
 
     console.log(selectedState);
   }
 
   const changeState = () => {
-    setState("Michigan");
+    setState("Illinois");
   };
 
   return (
