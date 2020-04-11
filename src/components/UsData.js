@@ -1,7 +1,6 @@
 import React from "react";
 import useUsData from "./useUsData";
-import useStateData from "./useStateData";
-import { API, API_STATES } from "../constants";
+import { API } from "../constants";
 import SearchParams from "./SearchParams";
 
 const UsData = (props) => {
