@@ -30,6 +30,10 @@ const SearchParams = () => {
 
   return (
     <div>
+      <label htmlFor="state">
+        State
+        <input id="state" placeholder="state" />
+      </label>
       <button onClick={changeState}>update state</button>
     </div>
   );
