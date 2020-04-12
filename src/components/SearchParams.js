@@ -5,10 +5,12 @@ import useUsData from "./useUsData";
 const SearchParams = () => {
   const [stateData] = useUsData(API_STATES);
   const [state, setState] = useState("New York");
+  const allStates = [];
 
   if (!stateData.loading) {
     let selectedState = stateData.data
       .filter(({ provinceState }) => {
+        allStates.push(provinceState);
         return provinceState === state;
       })
       .reduce(
@@ -23,6 +25,9 @@ const SearchParams = () => {
 
     console.log(selectedState);
   }
+
+  const distinctState = [...new Set(allStates)];
+  console.log(distinctState);
 
   const changeState = () => {
     setState("Illinois");
