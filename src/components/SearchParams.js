@@ -6,40 +6,50 @@ const SearchParams = () => {
   const [stateData] = useUsData(API_STATES);
   const [state, setState] = useState("New York");
   const allStates = [];
+  let distinctState = [];
+  let selectedState = { confirmed: 0, recovered: 0, deaths: 0 };
 
   if (!stateData.loading) {
-    let selectedState = stateData.data
+    selectedState = stateData.data
       .filter(({ provinceState }) => {
         allStates.push(provinceState);
         return provinceState === state;
       })
-      .reduce(
-        (prev, { confirmed, recovered, deaths }) => {
-          prev.confirmed = prev.confirmed + confirmed;
-          prev.recovered = prev.recovered + recovered;
-          prev.deaths = prev.deaths + deaths;
-          return prev;
-        },
-        { confirmed: 0, recovered: 0, deaths: 0 }
-      );
-
-    console.log(selectedState);
+      .reduce((prev, { confirmed, recovered, deaths }) => {
+        prev.confirmed = prev.confirmed + confirmed;
+        prev.recovered = prev.recovered + recovered;
+        prev.deaths = prev.deaths + deaths;
+        return prev;
+      }, selectedState);
   }
 
-  const distinctState = [...new Set(allStates)];
-  console.log(distinctState);
-
-  const changeState = () => {
-    setState("Illinois");
-  };
-
+  distinctState = [...new Set(allStates)];
   return (
     <div>
       <label htmlFor="state">
         State
-        <input id="state" placeholder="state" />
+        <select
+          id={state}
+          data-testid={state}
+          value={state}
+          onChange={(e) => setState(e.target.value)}
+          onBlur={(e) => setState(e.target.value)}
+          disabled={!distinctState.length}
+        >
+          <option />
+          {distinctState.map((stateProvince) => (
+            <option key={stateProvince} value={stateProvince}>
+              {stateProvince}
+            </option>
+          ))}
+        </select>
       </label>
-      <button onClick={changeState}>update state</button>
+      <div>
+        <p>State level</p>
+        <p>confirmed {selectedState.confirmed}</p>
+        <p>recovered {selectedState.recovered}</p>
+        <p>deaths {selectedState.deaths}</p>
+      </div>
     </div>
   );
 };
