@@ -1,8 +1,8 @@
 import React from "react";
-import UsData from "./components/UsData";
+import UsLevel from "./components/UsLevel";
 
 const App = () => {
-  return <UsData />;
+  return <UsLevel />;
 };
 
 export default App;

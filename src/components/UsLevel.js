@@ -1,10 +1,11 @@
 import React from "react";
-import useUsData from "./useUsData";
+import useUsData from "./useFetchData";
 import { API } from "../constants";
-import SearchParams from "./SearchParams";
+import StateLevel from "./StateLevel";
+import useFetchData from "./useFetchData";
 
-const UsData = (props) => {
-  const [usData] = useUsData(API);
+const UsLevel = () => {
+  const [usData] = useFetchData(API);
 
   return (
     <div>
@@ -16,11 +17,11 @@ const UsData = (props) => {
           <p>Recovered {usData.data.recovered.value} </p>
           <p>Deaths {usData.data.deaths.value} </p>
           <p>Last Update {usData.data.lastUpdate} </p>
-          <SearchParams />
+          <StateLevel />
         </div>
       )}
     </div>
   );
 };
 
-export default UsData;
+export default UsLevel;

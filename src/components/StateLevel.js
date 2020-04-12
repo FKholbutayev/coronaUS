@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { API_STATES } from "../constants";
-import useUsData from "./useUsData";
+import useFetchData from "./useFetchData";
 
-const SearchParams = () => {
-  const [stateData] = useUsData(API_STATES);
+const StateLevel = () => {
+  const [stateData] = useFetchData(API_STATES);
   const [state, setState] = useState("New York");
   const allStates = [];
   let distinctState = [];
@@ -54,4 +54,4 @@ const SearchParams = () => {
   );
 };
 
-export default SearchParams;
+export default StateLevel;

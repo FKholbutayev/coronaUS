@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 
-const useUsData = (api) => {
+const useFetchData = (api) => {
   const [usData, setUsData] = useState({ data: null, loading: true });
 
   useEffect(() => {
@@ -17,4 +17,4 @@ const useUsData = (api) => {
   return [usData];
 };
 
-export default useUsData;
+export default useFetchData;
